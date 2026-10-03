@@ -1,0 +1,295 @@
+/* =====================================================================
+   TEMA MINECRAFT para JavaFX (motor CSS nativo de JavaFX, no web)
+   Paleta:  obsidiana #2b2b2b | creeper #3c8527 | redstone #a8281e
+            diamante #2a8a8a  | piedra #7a7a7a  | texto amarillo #ffff55
+   Regla de oro: TODAS las esquinas cuadradas (radius 0) y biseles 3D
+   (borde claro arriba/izquierda, oscuro abajo/derecha) como los bloques.
+   ===================================================================== */
+
+/* ---------- Base ---------- */
+.root {
+    -fx-background-color: #2b2b2b;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-base: #3a3a3a;
+    -fx-accent: #3c8527;
+    -fx-focus-color: #ffff55;
+    -fx-faint-focus-color: transparent;
+}
+
+/* ---------- Cabecera: césped sobre tierra ---------- */
+.header {
+    -fx-background-color:
+        linear-gradient(to bottom, #6aaa40 0%, #5d9e34 22%, #4a7f2a 26%, #866043 26%, #6b4a30 100%);
+    -fx-border-color: transparent transparent #000000 transparent;
+    -fx-border-width: 0 0 3 0;
+}
+.titulo {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 30px;
+    -fx-effect: dropshadow(one-pass-box, #3f3f3f, 0, 0, 3, 3);
+}
+.subtitulo {
+    -fx-text-fill: #ffff55;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(one-pass-box, #3f3f15, 0, 0, 2, 2);
+}
+
+/* ---------- Paneles (estilo inventario oscuro) ---------- */
+.panel {
+    -fx-background-color: #383838;
+    -fx-background-radius: 0;
+    -fx-border-color: #000000, #5a5a5a #1c1c1c #1c1c1c #5a5a5a;
+    -fx-border-width: 2, 3;
+    -fx-border-insets: 0, 2;
+    -fx-border-radius: 0;
+}
+.panel-titulo {
+    -fx-text-fill: #ffff55;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(one-pass-box, #3f3f15, 0, 0, 2, 2);
+}
+.campo-label {
+    -fx-text-fill: #d0d0d0;
+}
+
+/* Indicador de modo */
+.modo {
+    -fx-background-color: #000000;
+    -fx-padding: 6 8;
+    -fx-font-size: 12px;
+}
+.modo-nuevo   { -fx-text-fill: #55ff55; }
+.modo-edicion { -fx-text-fill: #55ffff; }
+
+/* ---------- Campos de texto (como el chat de Minecraft) ---------- */
+.text-field {
+    -fx-background-color: #000000;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: #a0a0a0;
+    -fx-border-width: 2;
+    -fx-border-radius: 0;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #6f6f6f;
+    -fx-highlight-fill: #3c8527;
+    -fx-highlight-text-fill: #ffffff;
+    -fx-padding: 8 10;
+}
+.text-field:hover   { -fx-border-color: #d0d0d0; }
+.text-field:focused { -fx-border-color: #ffff55; }
+.text-field.campo-error,
+.text-field.campo-error:focused {
+    -fx-border-color: #ff5555;
+    -fx-background-color: #1f0000;
+}
+
+/* ---------- Botones: bloque con bisel ---------- */
+.button {
+    -fx-background-color: #7a7a7a;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: #000000, #b5b5b5 #3c3c3c #3c3c3c #b5b5b5;
+    -fx-border-width: 2, 3;
+    -fx-border-insets: 0, 2;
+    -fx-border-radius: 0;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-padding: 10 12;
+    -fx-cursor: hand;
+}
+.button .text {
+    -fx-effect: dropshadow(one-pass-box, #2a2a2a, 0, 0, 2, 2);
+}
+.button:hover {
+    -fx-background-color: #8f8fbf;               /* hover azulado como en el menú del juego */
+    -fx-text-fill: #ffffa0;
+}
+.button:focused {
+    -fx-border-color: #ffff55, #b5b5b5 #3c3c3c #3c3c3c #b5b5b5;
+}
+.button:pressed {
+    -fx-border-color: #000000, #3c3c3c #b5b5b5 #b5b5b5 #3c3c3c;   /* bisel invertido = hundido */
+}
+.button:disabled {
+    -fx-opacity: 0.4;
+}
+
+/* Foco amarillo en botones de color (antes de :pressed para que el hundido gane al hacer clic) */
+.btn-enviar:focused     { -fx-border-color: #ffff55, #6fcf4b #1f4f13 #1f4f13 #6fcf4b; }
+.btn-eliminar:focused   { -fx-border-color: #ffff55, #e05a50 #5c120c #5c120c #e05a50; }
+.btn-actualizar:focused { -fx-border-color: #ffff55, #5fd0d0 #134646 #134646 #5fd0d0; }
+.btn-recordar:focused   { -fx-border-color: #ffff55, #f0c040 #5e4405 #5e4405 #f0c040; }
+
+/* Enviar = verde creeper */
+.btn-enviar {
+    -fx-background-color: #3c8527;
+    -fx-border-color: #000000, #6fcf4b #1f4f13 #1f4f13 #6fcf4b;
+}
+.btn-enviar:hover   { -fx-background-color: #4ea832; }
+.btn-enviar:pressed { -fx-border-color: #000000, #1f4f13 #6fcf4b #6fcf4b #1f4f13; }
+
+/* Eliminar = rojo redstone */
+.btn-eliminar {
+    -fx-background-color: #a8281e;
+    -fx-border-color: #000000, #e05a50 #5c120c #5c120c #e05a50;
+}
+.btn-eliminar:hover   { -fx-background-color: #c9342a; }
+.btn-eliminar:pressed { -fx-border-color: #000000, #5c120c #e05a50 #e05a50 #5c120c; }
+
+/* Actualizar = diamante */
+.btn-actualizar {
+    -fx-background-color: #2a8a8a;
+    -fx-border-color: #000000, #5fd0d0 #134646 #134646 #5fd0d0;
+}
+.btn-actualizar:hover   { -fx-background-color: #33a5a5; }
+.btn-actualizar:pressed { -fx-border-color: #000000, #134646 #5fd0d0 #5fd0d0 #134646; }
+
+/* Recordar = oro */
+.btn-recordar {
+    -fx-background-color: #b8860b;
+    -fx-border-color: #000000, #f0c040 #5e4405 #5e4405 #f0c040;
+}
+.btn-recordar:hover   { -fx-background-color: #d49c12; }
+.btn-recordar:pressed { -fx-border-color: #000000, #5e4405 #f0c040 #f0c040 #5e4405; }
+
+/* Limpiar = piedra (usa el estilo base) */
+.btn-limpiar { -fx-font-size: 12px; }
+
+/* ---------- Tabla ---------- */
+.table-view {
+    -fx-background-color: #1e1e1e;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-padding: 0;
+    -fx-table-cell-border-color: #333333;
+}
+.table-view:focused {
+    -fx-border-color: #ffff55;
+}
+.table-view .column-header-background {
+    -fx-background-color: #4a4a4a;
+}
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: #5a5a5a;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-color: #7a7a7a #2a2a2a #2a2a2a #7a7a7a;
+    -fx-border-width: 2;
+    -fx-size: 34px;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #ffff55;
+    -fx-alignment: center-left;
+    -fx-padding: 0 8;
+}
+.table-view .column-header .arrow {
+    -fx-background-color: #ffff55;
+}
+.table-view .corner {
+    -fx-background-color: #4a4a4a;
+}
+
+.table-row-cell {
+    -fx-background-color: #262626;
+    -fx-background-insets: 0;
+    -fx-cell-size: 34px;
+}
+.table-row-cell:odd {
+    -fx-background-color: #2e2e2e;
+}
+.table-row-cell:filled:hover {
+    -fx-background-color: #3d3d3d;
+}
+.table-row-cell:filled:selected {
+    -fx-background-color: #3c8527;
+}
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+.table-row-cell .table-cell {
+    -fx-text-fill: #e6e6e6;
+    -fx-padding: 0 8;
+    -fx-alignment: center-left;
+}
+.table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #ffffff;
+}
+.tabla-vacia {
+    -fx-text-fill: #8a8a8a;
+    -fx-text-alignment: center;
+}
+
+/* ---------- Barras de desplazamiento cuadradas ---------- */
+.scroll-bar {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 0;
+}
+.scroll-bar .thumb {
+    -fx-background-color: #7a7a7a;
+    -fx-background-radius: 0;
+    -fx-background-insets: 2;
+}
+.scroll-bar .thumb:hover { -fx-background-color: #9a9a9a; }
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: #4a4a4a;
+    -fx-background-radius: 0;
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: #dddddd;
+}
+
+/* ---------- Caja de ayuda ---------- */
+.ayuda-box {
+    -fx-background-color: #262626;
+    -fx-border-color: #1a1a1a;
+    -fx-border-width: 2;
+}
+.ayuda-titulo { -fx-text-fill: #ffff55; -fx-font-size: 11px; }
+.ayuda        { -fx-text-fill: #9a9a9a; -fx-font-size: 11px; -fx-font-weight: normal; }
+
+/* ---------- Barra de estado ---------- */
+.status-bar {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #000000 transparent transparent transparent;
+    -fx-border-width: 3 0 0 0;
+}
+.estado-ok    { -fx-text-fill: #55ff55; }
+.estado-error { -fx-text-fill: #ff5555; }
+.contador     { -fx-text-fill: #ffff55; }
+
+/* ---------- Diálogo de confirmación ---------- */
+.dialog-pane {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #000000;
+    -fx-border-width: 3;
+}
+.dialog-pane > .header-panel {
+    -fx-background-color: #383838;
+    -fx-border-color: transparent transparent #000000 transparent;
+    -fx-border-width: 0 0 2 0;
+}
+.dialog-pane > .header-panel .label {
+    -fx-text-fill: #ffff55;
+    -fx-font-size: 14px;
+}
+.dialog-pane > .content.label {
+    -fx-text-fill: #e6e6e6;
+}
+.dialog-pane .graphic-container {
+    -fx-opacity: 0.85;
+}
+/* En el diálogo de eliminación, el botón OK es rojo redstone */
+.dialogo-mc .button:default {
+    -fx-background-color: #a8281e;
+    -fx-border-color: #000000, #e05a50 #5c120c #5c120c #e05a50;
+}
+.dialogo-mc .button:default:hover {
+    -fx-background-color: #c9342a;
+}
